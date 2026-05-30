@@ -20,7 +20,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="relative flex h-16 items-center justify-between">
           {/* Mobile menu */}
           <div className="flex lg:hidden">
             <Sheet>
@@ -60,10 +60,12 @@ export function Header() {
           </nav>
 
           {/* Logo */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2">
-            <span className="font-serif text-2xl font-semibold tracking-wider text-foreground">
-              MAISON
-            </span>
+          <Link
+            href="/"
+            aria-label="홈으로 이동"
+            className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 px-4 py-2 font-serif text-2xl font-semibold tracking-wider text-foreground hover:opacity-70 transition-opacity"
+          >
+            MAISON
           </Link>
 
           {/* Right icons */}

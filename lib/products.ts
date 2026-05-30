@@ -121,22 +121,69 @@ export const products: Product[] = [
     isNew: true,
     isSale: false,
   },
+  {
+    id: 13,
+    name: "Scented Candle Set",
+    price: 79000,
+    image: "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600&h=800&fit=crop&q=80",
+    category: "Lifestyle",
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 14,
+    name: "Linen Throw Blanket",
+    price: 159000,
+    originalPrice: 189000,
+    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&h=800&fit=crop&q=80",
+    category: "Lifestyle",
+    isNew: false,
+    isSale: true,
+  },
+  {
+    id: 15,
+    name: "Minimalist Ceramic Vase",
+    price: 99000,
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&h=800&fit=crop&q=80",
+    category: "Lifestyle",
+    isNew: true,
+    isSale: false,
+  },
 ]
 
 export function getNewProducts() {
   return products.filter((product) => product.isNew)
 }
 
-export function getNewProductPriceBounds() {
-  const newProducts = getNewProducts()
-  const prices = newProducts.map((product) => product.price)
+export function getProductsByCategory(category: string) {
+  return products.filter((product) => product.category === category)
+}
+
+export function getSaleProducts() {
+  return products.filter((product) => product.isSale)
+}
+
+export function getProductPriceBounds(productList: Product[]) {
+  if (productList.length === 0) {
+    return { min: 0, max: 100000 }
+  }
+
+  const prices = productList.map((product) => product.price)
   const min = Math.floor(Math.min(...prices) / 10000) * 10000
   const max = Math.ceil(Math.max(...prices) / 10000) * 10000
   return { min, max }
 }
 
+export function getNewProductPriceBounds() {
+  return getProductPriceBounds(getNewProducts())
+}
+
 export function getNewProductCategories() {
   return [...new Set(getNewProducts().map((product) => product.category))].sort()
+}
+
+export function getAllProductCategories() {
+  return [...new Set(products.map((product) => product.category))].sort()
 }
 
 export function formatPrice(price: number) {
